@@ -51,7 +51,6 @@ class MutasiController extends Controller
         }
     }
 
-    
     public function update(Request $request)
     {        
         $mutasi = Mutasi::find($request->id);
@@ -63,5 +62,29 @@ class MutasiController extends Controller
         
         $mutasi->save();
         return response()->json(["message" => "success", "mutasi" => $mutasi]);
+    }
+
+    public function historyByUserId(Request $request)
+    {
+        $history = Mutasi::where('userId', $request->userid)
+               ->get();
+        if ($history) {
+            return $history;
+        } else {
+            return response()->json([]);
+        }             
+        
+    }
+    
+    public function historyByBarangId(Request $request)
+    {
+        $history = Mutasi::where('barangId', $request->barangId)
+               ->get();
+        if ($history) {
+            return $history;
+        } else {
+            return response()->json([]);
+        }             
+        
     }
 }

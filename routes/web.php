@@ -24,7 +24,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/mutasi', [MutasiController::class, 'index']);
     Route::post('/mutasi', [MutasiController::class, 'create']);  
     Route::delete('/mutasi', [MutasiController::class, 'delete']); 
-    Route::patch('/mutasi', [MutasiController::class, 'update']);  
+    Route::patch('/mutasi', [MutasiController::class, 'update']); 
+    Route::get('/historyByUserId', [MutasiController::class, 'historyByUserId']);
+    Route::get('/historyByBarangId', [MutasiController::class, 'historyByBarangId']);  
 });
 
 
