@@ -12,16 +12,17 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('mutasi', function (Blueprint $table) {
-            $table->uuid('kodemutasi')->primary();
+            $table->uuid('id')->primary();
             $table->string('jenis_mutasi')->default('masuk')->nullable(); //keluar
             $table->unsignedInteger('jumlah')->default(0)->nullable(); 
             $table->date('tglMutasi')->nullable();
-            $table->foreignId('userId')->constrained(
-                table: 'users', indexName: 'mutasiUserId'
-            )->onUpdate('cascade')->onDelete('cascade');
             $table->string('barangId');
+            $table->string('userId');
             //TODO
-            /*$table->foreignId('barangId')->constrained(
+            /*$table->foreignId('userId')->constrained(
+                table: 'users', indexName: 'mutasiUserId'
+            )->onUpdate('cascade')->onDelete('cascade');            
+            $table->foreignId('barangId')->constrained(
                 table: 'barang', indexName: 'mutasiBarangId'
             )->onUpdate('cascade')->onDelete('cascade');*/
             $table->timestamps();

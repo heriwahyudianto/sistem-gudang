@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\BarangController;
+use App\Http\Controllers\MutasiController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -20,6 +21,10 @@ Route::middleware('auth')->group(function () {
     Route::post('/barang', [BarangController::class, 'create']);    
     Route::delete('/barang', [BarangController::class, 'delete']);
     Route::patch('/barang', [BarangController::class, 'update']);  
+    Route::get('/mutasi', [MutasiController::class, 'index']);
+    Route::post('/mutasi', [MutasiController::class, 'create']);  
+    Route::delete('/mutasi', [MutasiController::class, 'delete']); 
+    Route::patch('/mutasi', [MutasiController::class, 'update']);  
 });
 
 
