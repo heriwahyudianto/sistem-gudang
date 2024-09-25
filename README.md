@@ -40,16 +40,183 @@ This endpoint retrieves a list of barang.
 	No request body is required for this request.
 	##### Response
 	The response will be in JSON format with the following schema:
-[
-    {
-        "id": "",
-        "kode": "",
-        "name": "",
-        "kategori": "",
-        "lokasi": "",
-        "dimensi": "",
-        "berat": "",
-        "created_at": "",
-        "updated_at": ""
+   `[
+        {
+            "id": "",
+            "kode": "",
+            "name": "",
+            "kategori": "",
+            "lokasi": "",
+            "dimensi": "",
+            "berat": "",
+            "created_at": "",
+            "updated_at": ""
+        }
+    ]` 
+    
+4. POST /barang
+	This endpoint is used to create a new item in the inventory.
+	##### Request Body
+	-   `kode` (text): The code of the item.
+	-   `name` (text): The name of the item.
+	-   `kategori` (text): The category of the item.
+    -   `lokasi` (text): The location of the item.
+    -   `dimensi` (text): The dimensions of the item.
+    -   `berat` (text): The weight of the item.
+	##### Response
+	The response is a JSON object with the following schema:
+`{
+  "type": "object",
+  "properties": {
+    "message": {
+      "type": "string"
+    },
+    "barang": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "kode": {
+          "type": "string"
+        },
+        "kategori": {
+          "type": "string"
+        },
+        "lokasi": {
+          "type": "string"
+        },
+        "dimensi": {
+          "type": "string"
+        },
+        "berat": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "updated_at": {
+          "type": "string"
+        },
+        "created_at": {
+          "type": "string"
+        }
+      }
     }
-]
+  }
+}`    
+
+5. DELETE /barang
+This endpoint is used to delete a specific item by its ID.
+	##### Request
+	-   Parameters
+	    -   id (string, required): The unique identifier of the item to be deleted.
+	##### Response
+	The response is in JSON format with the following schema:
+	    `{
+    "type": "object",
+    "properties": {
+        "message": {
+            "type": "string"
+        }
+    }
+}`
+
+6. PATCH/ update barang 
+This endpoint makes an HTTP PATCH request to update a specific item with the given ID. The request URL includes query parameters for ID, kode, name, kategori, lokasi, dimensi, and berat. The request uses form-data as the request body type, but it does not include any specific parameters.
+
+	##### Response
+	The response of this request is a JSON schema, which will define the structure of the response data in a JSON format.
+
+7. GET /mutasi
+This endpoint retrieves mutasi data.
+Request Body 
+This request does not require a request body.
+
+	Response 
+	The response is a JSON array representing the mutasi data. The response schema is as follows: 
+	[]
+
+8. POST /mutasi
+This endpoint is used to create a new mutasi entry.
+	##### Request Body
+	-   jenis_mutasi (text): Type of mutasi    
+	-   jumlah (text): Amount of mutasi    
+	-   tglMutasi (text): Date of mutasi    
+	-   userId (text): ID of the use    
+	-   barangId (text): ID of the barang
+    ##### Response
+	The response is a JSON object with the following schema:
+`{
+    "message": "",
+    "mutasi": {
+        "jenis_mutasi": "",
+        "jumlah": "",
+        "tglMutasi": "",
+        "userId": "",
+        "barangId": "",
+        "id": "",
+        "updated_at": "",
+        "created_at": ""
+    }
+}`
+
+9.  Delete /Mutasi
+	This endpoint is used to delete a specific mutasi by providing its ID as a query parameter.
+	##### Request
+	-   Method: DELETE
+    -   Endpoint: `http://localhost:8000/mutasi`
+    -   Query Parameters:
+        -   `id`: The ID of the mutasi to be deleted.
+	##### Response
+	The response is in JSON format with the following schema:
+	`{
+  "type": "object",
+  "properties": {
+    "message": {
+      "type": "string"
+    }
+  }
+}`
+
+
+10. Retrieve History by User ID
+This endpoint makes an HTTP GET request to retrieve the history for a specific user based on the user ID.
+	##### Request
+	-   URL: `http://localhost:8000/historyByUserId`
+    -   Method: `GET`
+    -   URL Parameters:
+        -   `userid` (integer) - The ID of the user for whom the history is to be retrieved.
+	##### Response
+	The response is in JSON format and represents an array of history items. Each history item object has the following properties:
+	-   `id` (string) - The ID of the history item.
+	-   `jenis_mutasi` (string) - The type of mutation.
+    -   `jumlah` (number) - The amount of mutation.
+    -   `tglMutasi` (string) - The date of the mutation.
+    -   `barangId` (string) - The ID of the item.
+    -   `userId` (string) - The ID of the user.
+    -   `created_at` (string) - The creation date of the history item.
+    -   `updated_at` (string) - The last update date of the history item.
+`[
+  {
+    "id": "",
+    "jenis_mutasi": "",
+    "jumlah": 0,
+    "tglMutasi": "",
+    "barangId": "",
+    "userId": "",
+    "created_at": "",
+    "updated_at": ""
+  }
+]`
+
+11. Retrieve History by Barang ID 
+This endpoint retrieves the history of a specific item by its unique identifier (barangId). The response is a JSON array containing objects with the following properties:
+	-   id (string): The unique identifier of the history entry.
+    -   jenis_mutasi (string): The type of mutation.
+    -   jumlah (number): The quantity of the item involved in the mutation.
+    -   tglMutasi (string): The date of the mutation.
+    -   barangId (string): The unique identifier of the item.
+    -   userId (string): The unique identifier of the user associated with the mutation.
+    -   created_at (string): The date and time when the history entry was created.
+    -   updated_at (string): The date and time when the history entry was last updated.
