@@ -1,66 +1,55 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Cara Install
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+ 1. clone project dari github dari link berikut ini 
+ [github.com/heriwahyudianto/sistem-gudang](https://github.com/heriwahyudianto/sistem-gudang)
+ 2. jika anda menggunakan os Windows, aktifkan apache dan mysql.
+ 3. lalu command berikut di folder yang sudah di clone tadi.
+      `composer install`
+ 4. lalu command
+       php artisan migrate
+       php artisan serve
+  5. jika berhasil, buka browser untuk mendaftar sebagai user terlebih dahulu
+  [register](http://localhost:8000/register)
+6. buka desktop postman untuk CRUD user, barang, dan mutasi. Daftar endpoint API ada di link sbb:
+[enpoint API list](https://id-grow-9375.postman.co/workspace/id-grow-Workspace~3840b814-6df8-4f6c-ac22-cdce009ff799/collection/3638444-e6e3f834-5286-490b-a755-27d2aac336b9?action=share&creator=3638444)
 
-## About Laravel
+# API doc
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+1. GET CRSF TOKEN 
+ http://localhost:8000/sanctum/csrf-cookie
+ 
+	The `GET` request to `http://localhost:8000/sanctum/csrf-cookie` is used to retrieve a CSRF cookie for Sanctum authentication.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+	The response for this request is expected to have a status code of `204` and a `Content-Type` of `text/xml`. However, the response body is `null`.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+	As per the user's request, the response can be documented as a JSON schema, but since the response is `null`, there are no specific properties to define in the JSON schema.
 
-## Learning Laravel
-
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
-
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
-
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
-
-## Laravel Sponsors
-
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
-
-### Premium Partners
-
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+2. Login
+http://localhost:8000/login
+This API endpoint is used to log in a user.
+	##### Request Body
+	-  	 email (text)    
+	-   password (text)
+	##### Response
+	The response is in HTML format and contains the content of a web page. To document the response as a JSON schema, you may need to convert the HTML content to a structured JSON format using an appropriate tool.
+	
+3.  GET /barang
+http://localhost:8000/barang
+This endpoint retrieves a list of barang.
+	##### Request
+	No request body is required for this request.
+	##### Response
+	The response will be in JSON format with the following schema:
+[
+    {
+        "id": "",
+        "kode": "",
+        "name": "",
+        "kategori": "",
+        "lokasi": "",
+        "dimensi": "",
+        "berat": "",
+        "created_at": "",
+        "updated_at": ""
+    }
+]

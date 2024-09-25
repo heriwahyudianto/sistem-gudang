@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Barang;
+use App\Models\Mutasi;
 
 class BarangController extends Controller
 {
@@ -57,12 +58,17 @@ class BarangController extends Controller
 
     public function delete(Request $request)
     {
-        $barang = Barang::find($request->id);
-        $barang->delete();
-        if ($barang) {
-            return response()->json(["message" => "barang with id ".$request->id." was deleted"]);
+        $history = Mutasi::where('barangId', $request->barangId)->get();
+        if ($history) {
+            return response()->json(["message" => "Can't delete due to data integrity with mutasi"]);
         } else {
-            return response()->json(["message" => "correct id is required"]);
+            $barang = Barang::find($request->id);
+            $barang->delete();
+            if ($barang) {
+                return response()->json(["message" => "barang with id ".$request->id." was deleted"]);
+            } else {
+                return response()->json(["message" => "correct id is required"]);
+            }
         }
     }
 }

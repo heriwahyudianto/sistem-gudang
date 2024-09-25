@@ -67,6 +67,7 @@ class MutasiController extends Controller
     public function historyByUserId(Request $request)
     {
         $history = Mutasi::where('userId', $request->userid)
+            ->orderByDesc('tglMutasi')
                ->get();
         if ($history) {
             return $history;
@@ -79,7 +80,8 @@ class MutasiController extends Controller
     public function historyByBarangId(Request $request)
     {
         $history = Mutasi::where('barangId', $request->barangId)
-               ->get();
+            ->orderByDesc('tglMutasi')
+            ->get();
         if ($history) {
             return $history;
         } else {
